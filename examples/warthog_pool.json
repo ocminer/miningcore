@@ -93,7 +93,7 @@
               "maxDiff": null,
               "targetTime": 15,
               "retargetTime": 90,
-              "variancePercent": 100,
+              "variancePercent": 30,
               "maxDelta": 512
             }
           }

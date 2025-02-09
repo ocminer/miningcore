@@ -30,6 +30,7 @@
 #include <boost/mpl/vector.hpp>
 #include <boost/mpl/contains.hpp>
 #include <deque>
+#include <cstdint>
 
 namespace epee
 {
