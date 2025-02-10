@@ -315,23 +315,23 @@ public class XelisPayoutHandler : PayoutHandlerBase,
                     }).ToArray()
             };
 
-            var estimateFeesRequest = new EstimateFeesRequest
-            {
-                Transfers = buildTransactionRequest.Transfers
-            };
-
-            var estimateFeesResponse = await rpcClientWallet.ExecuteAsync<object>(logger, XelisWalletCommands.EstimateFees, ct, estimateFeesRequest);
-            if(estimateFeesResponse.Error != null)
-            {
-                logger.Warn(()=> $"[{LogCategory}] '{XelisWalletCommands.EstimateFees}': {estimateFeesResponse.Error.Message} (Code {estimateFeesResponse.Error.Code})");
-                continue;
-            }
-
-            var estimatedTransactionFees = Convert.ToDecimal(estimateFeesResponse.Response) / XelisConstants.SmallestUnit;
-            logger.Info(() => $"[{LogCategory}] Estimated transaction fees: {FormatAmount(estimatedTransactionFees)}");
-
             if(extraPoolPaymentProcessingConfig?.KeepTransactionFees == true)
             {
+                var estimateFeesRequest = new EstimateFeesRequest
+                {
+                    Transfers = buildTransactionRequest.Transfers
+                };
+
+                var estimateFeesResponse = await rpcClientWallet.ExecuteAsync<object>(logger, XelisWalletCommands.EstimateFees, ct, estimateFeesRequest);
+                if(estimateFeesResponse.Error != null)
+                {
+                    logger.Warn(()=> $"[{LogCategory}] '{XelisWalletCommands.EstimateFees}': {estimateFeesResponse.Error.Message} (Code {estimateFeesResponse.Error.Code})");
+                    continue;
+                }
+
+                var estimatedTransactionFees = Convert.ToDecimal(estimateFeesResponse.Response) / XelisConstants.SmallestUnit;
+                logger.Info(() => $"[{LogCategory}] Estimated transaction fees: {FormatAmount(estimatedTransactionFees)}");
+
                 logger.Debug(() => $"[{LogCategory}] Pool does not pay the transaction fee, so each address will have its payout deducted with [{FormatAmount(estimatedTransactionFees / page.Length)}]");
 
                 buildTransactionRequest = new BuildTransactionRequest
@@ -348,12 +348,12 @@ public class XelisPayoutHandler : PayoutHandlerBase,
                             };
                         }).ToArray()
                 };
-            }
 
-            buildTransactionRequest.Fee = new BuildTransactionFee
-            {
-                Amount = (ulong) (estimatedTransactionFees * XelisConstants.SmallestUnit)
-            };
+                buildTransactionRequest.Fee = new BuildTransactionFee
+                {
+                    Amount = (ulong) (estimatedTransactionFees * XelisConstants.SmallestUnit)
+                };
+            }
 
             var buildTransactionResponse = await rpcClientWallet.ExecuteAsync<BuildTransactionResponse>(logger, XelisWalletCommands.BuildTransaction, ct, buildTransactionRequest);
             if(buildTransactionResponse.Error != null)
@@ -371,10 +371,12 @@ public class XelisPayoutHandler : PayoutHandlerBase,
             else
             {
                 // payment successful
-                logger.Info(() => $"[{LogCategory}] Payment transaction id: {buildTransactionResponse.Response.Hash}");
+                var finalTransactionFees = (decimal) buildTransactionResponse.Response.Fee / XelisConstants.SmallestUnit;
+
+                logger.Info(() => $"[{LogCategory}] Payment transaction id: {buildTransactionResponse.Response.Hash} || Payment transaction fees: {FormatAmount(finalTransactionFees)}");
 
                 await PersistPaymentsAsync(page, buildTransactionResponse.Response.Hash);
-                NotifyPayoutSuccess(poolConfig.Id, page, new[] { buildTransactionResponse.Response.Hash }, (decimal) (buildTransactionResponse.Response.Fee / XelisConstants.SmallestUnit));
+                NotifyPayoutSuccess(poolConfig.Id, page, new[] { buildTransactionResponse.Response.Hash }, finalTransactionFees);
             }
         }
     }

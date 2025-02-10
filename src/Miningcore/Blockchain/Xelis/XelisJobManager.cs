@@ -471,7 +471,7 @@ public class XelisJobManager : JobManagerBase<XelisJob>
                 if(status.Error != null)
                     logger.Warn(() => $"'{XelisCommands.GetStatus}': {status.Error.Message} (Code {status.Error.Code})");
 
-                if(status.Response.BestTopoHeight == status.Response.TopoHeight)
+                if(status.Response.BestTopoHeight <= status.Response.MedianTopoHeight)
                 {
                     logger.Info(() => $"'{XelisCommands.DaemonName}' daemon synched with blockchain");
                     break;
