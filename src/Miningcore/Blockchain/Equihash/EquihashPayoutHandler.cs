@@ -44,7 +44,7 @@ public class EquihashPayoutHandler : BitcoinPayoutHandler
     protected Network network;
     protected EquihashCoinTemplate.EquihashNetworkParams chainConfig;
     protected override string LogCategory => "Equihash Payout Handler";
-    protected const decimal TransferFee = 0.0001m;
+    protected const decimal TransferFee = 0.001m;
     protected const int ZMinConfirmations = 8;
     protected const string PrivacyPolicy = "AllowRevealedRecipients";
 
