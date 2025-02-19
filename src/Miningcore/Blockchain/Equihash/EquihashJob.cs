@@ -76,7 +76,7 @@ public class EquihashJob
         // set versions
         tx.Version = txVersion;
 
-        // calculate outputs
+        // calculate outputs OCMINER
         if(networkParams.PayFundingStream)
         {
             rewardToPool = new Money(Math.Round(blockReward * (1m - (networkParams.PercentFoundersReward) / 100m)) + rewardFees, MoneyUnit.Satoshi);
@@ -508,7 +508,8 @@ public class EquihashJob
         {
             decimal fundingstreamTotal = 0;
             fundingstreamTotal = blockTemplate.Subsidy.FundingStreams.Sum(x => x.Value);
-            blockReward = (blockTemplate.Subsidy.Miner + fundingstreamTotal) * BitcoinConstants.SatoshisPerBitcoin;
+            //blockReward = (blockTemplate.Subsidy.Miner + fundingstreamTotal) * BitcoinConstants.SatoshisPerBitcoin; // Not needed anymore
+	    blockReward = (blockTemplate.Subsidy.Miner) * BitcoinConstants.SatoshisPerBitcoin;
         }
         else if(networkParams?.vOuts == true)
         {

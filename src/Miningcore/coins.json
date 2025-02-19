@@ -4173,9 +4173,9 @@
                     ]
                 },
                 "coinbaseTxNetwork": "zcash-main",
-                "payFoundersReward": true,
+                "payFoundersReward": false,
                 "payFundingStream": true,
-                "percentFoundersReward": 20,
+                "percentFoundersReward": 0,
                 "foundersRewardAddresses": [
                     "t3Vz22vK5z2LcKEdg16Yv4FFneEL1zg9ojd",
                     "t3cL9AucCajm3HXDhb5jBnJK2vapVoXsop3",
@@ -4248,9 +4248,9 @@
                     ]
                 },
                 "coinbaseTxNetwork": "zcash-test",
-                "payFoundersReward": true,
+                "payFoundersReward": false,
                 "payFundingStream": true,
-                "percentFoundersReward": 20,
+                "percentFoundersReward": 0,
                 "foundersRewardAddresses": [
                     "t2UNzUUx8mWBCRYPRezvA363EYXyEpHokyi",
                     "t2N9PH9Wk9xjqYg9iin1Ua3aekJqfAtE543",
