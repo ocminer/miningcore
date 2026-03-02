@@ -187,6 +187,8 @@ public partial class EquihashCoinTemplate
         {
             case "VRSC":
                 return "Verushash";
+            case "JUNO":
+                return "RandomX";
             default:
                 // TODO: return variant
                 return "Equihash";

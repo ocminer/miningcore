@@ -4150,6 +4150,42 @@
         "explorerTxLink": "https://explorer.veruscoin.io/tx/{0}",
         "explorerAccountLink": "https://explorer.veruscoin.io/address/{0}"
     },
+    "junocash": {
+        "name": "Junocash",
+        "symbol": "JUNO",
+        "family": "junocash",
+        "website": "",
+        "market": "",
+        "twitter": "",
+        "telegram": "",
+        "discord": "",
+        "usesZCashAddressFormat": true,
+        "useBitcoinPayoutHandler": false,
+        "networks": {
+            "main": {
+                "diff1": "0007ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+                "solutionSize": 32,
+                "solutionPreambleSize": 1,
+                "solver": {
+                    "hash": "equihash",
+                    "args": [200, 9, "ZcashPoW"]
+                },
+                "coinbaseTxNetwork": "zcash-main",
+                "payFoundersReward": false,
+                "payFundingStream": false,
+                "percentFoundersReward": 0,
+                "foundersRewardAddresses": [],
+                "foundersRewardSubsidySlowStartInterval": 0,
+                "foundersRewardSubsidyHalvingInterval": 840000,
+                "overwinterActivationHeight": 1,
+                "overwinterTxVersion": 3,
+                "overwinterTxVersionGroupId": 63210096,
+                "saplingActivationHeight": 1,
+                "saplingTxVersion": 4,
+                "saplingTxVersionGroupId": 2301567109
+            }
+        }
+    },
     "zcash": {
         "name": "ZCash",
         "symbol": "ZEC",

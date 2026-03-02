@@ -20,7 +20,7 @@ using IBlockRepository = Miningcore.Persistence.Repositories.IBlockRepository;
 
 namespace Miningcore.Blockchain.Equihash;
 
-[CoinFamily(CoinFamily.Equihash)]
+[CoinFamily(CoinFamily.Equihash, CoinFamily.Junocash)]
 public class EquihashPayoutHandler : BitcoinPayoutHandler
 {
     public EquihashPayoutHandler(

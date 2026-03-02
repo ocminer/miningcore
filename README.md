@@ -1,8 +1,8 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/nbvaa55gu3icd1q8?svg=true)](https://ci.appveyor.com/project/oliverw/miningcore)
-[![.NET](https://github.com/blackmennewstyle/miningcore/actions/workflows/dotnet.yml/badge.svg)](https://github.com/blackmennewstyle/miningcore/actions/workflows/dotnet.yml)
+[![Build status](https://ci.appveyor.com/api/projects/status/nbvaa55gu3icd1q8?svg=true)](https://ci.appveyor.com/project/ocminer/miningcore)
+[![.NET](https://github.com/ocminer/miningcore/actions/workflows/dotnet.yml/badge.svg)](https://github.com/ocminer/miningcore/actions/workflows/dotnet.yml)
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)]()
 
-<img src="https://github.com/blackmennewstyle/miningcore/raw/master/logo.png" width="150">
+<img src="https://github.com/ocminer/miningcore/raw/master/logo.png" width="150">
 
 ### Features
 
@@ -13,7 +13,7 @@
 - Session management for purging DDoS/flood initiated zombie workers
 - Payment processing
 - Banning System
-- Live Stats [API](https://github.com/oliverw/miningcore/wiki/API) on Port 4000
+- Live Stats [API](https://github.com/ocminer/miningcore/wiki/API) on Port 4000
 - WebSocket streaming of notable events like Blocks found, Blocks unlocked, Payments and more
 - POW (proof-of-work) & POS (proof-of-stake) support
 - Detailed per-pool logging to console & filesystem
@@ -23,16 +23,16 @@
 
 Commercial support directly by the maintainer is available through [miningcore.pro](https://store.miningcore.pro).
 
-For general questions visit the [Discussions Area](https://github.com/blackmennewstyle/miningcore/discussions).
+For general questions visit the [Discussions Area](https://github.com/ocminer/miningcore/discussions).
 
 ## Contributions
 
-Code contributions are very welcome and should be submitted as standard [pull requests](https://docs.github.com/en/pull-requests) (PR) based on the [`dev` branch](https://github.com/blackmennewstyle/miningcore/tree/dev).
+Code contributions are very welcome and should be submitted as standard [pull requests](https://docs.github.com/en/pull-requests) (PR) based on the [`dev` branch](https://github.com/ocminer/miningcore/tree/dev).
 
 ## Building on Debian/Ubuntu
 
 ```console
-git clone https://github.com/blackmennewstyle/miningcore
+git clone https://github.com/ocminer/miningcore
 cd miningcore
 ```
 
@@ -57,13 +57,17 @@ or
 ```console
 ./build-ubuntu-22.04.sh
 ```
+or
+```console
+./build-ubuntu-24.04.sh
+```
 
 ## Building on Windows
 
-Download and install the [.NET 6 SDK](https://dotnet.microsoft.com/download/dotnet/6.0)
+Download and install the [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
 
 ```dosbatch
-git clone https://github.com/blackmennewstyle/miningcore
+git clone https://github.com/ocminer/miningcore
 cd miningcore
 build-windows.bat
 ```
@@ -77,20 +81,20 @@ build-windows.bat
 In case you don't want to install any dependencies then you can build the app using the official Microsoft .NET SDK Docker image.
 
 ```console
-git clone https://github.com/blackmennewstyle/miningcore
+git clone https://github.com/ocminer/miningcore
 cd miningcore
 ```
 Then build using Docker:
 
 ```console
-docker run --rm -v $(pwd):/app -w /app mcr.microsoft.com/dotnet/sdk:6.0 /bin/bash -c 'apt update && apt install cmake clang ninja-build build-essential libssl-dev pkg-config libboost-all-dev libsodium-dev libzmq5 libzmq3-dev golang-go libgmp-dev libc++-dev zlib1g-dev -y --no-install-recommends && cd src/Miningcore && dotnet publish -c Release --framework net6.0 -o /app/build/'
+docker run --rm -v $(pwd):/app -w /app mcr.microsoft.com/dotnet/sdk:8.0 /bin/bash -c 'apt update && apt install cmake clang ninja-build build-essential libssl-dev pkg-config libboost-all-dev libsodium-dev libzmq5 libzmq3-dev golang-go libgmp-dev libc++-dev zlib1g-dev -y --no-install-recommends && cd src/Miningcore && dotnet publish -c Release --framework net8.0 -o /app/build/'
 ```
 It will use a Linux container, you will build a Linux executable that will not run on Windows or macOS. You can use a runtime argument (-r) to specify the type of assets that you want to publish (if they don't match the SDK container). The following examples assume you want assets that match your host operating system, and use runtime arguments to ensure that.
 
 For macOS:
 
 ```console
-docker run --rm -v $(pwd):/app -w /app mcr.microsoft.com/dotnet/sdk:6.0 /bin/bash -c 'apt update && apt install cmake clang ninja-build build-essential libssl-dev pkg-config libboost-all-dev libsodium-dev libzmq5 libzmq3-dev golang-go libgmp-dev libc++-dev zlib1g-dev -y --no-install-recommends && cd src/Miningcore && dotnet publish -c Release --framework net6.0 -o /app/build/ -r osx-x64 --self-contained false'
+docker run --rm -v $(pwd):/app -w /app mcr.microsoft.com/dotnet/sdk:8.0 /bin/bash -c 'apt update && apt install cmake clang ninja-build build-essential libssl-dev pkg-config libboost-all-dev libsodium-dev libzmq5 libzmq3-dev golang-go libgmp-dev libc++-dev zlib1g-dev -y --no-install-recommends && cd src/Miningcore && dotnet publish -c Release --framework net8.0 -o /app/build/ -r osx-x64 --self-contained false'
 ```
 
 ### Building and Running Miningcore from a container
@@ -121,7 +125,7 @@ docker run -d \
 For Windows using Linux container:
 
 ```console
-docker run --rm -v $(pwd):/app -w /app mcr.microsoft.com/dotnet/sdk:6.0 /bin/bash -c 'apt update && apt install cmake clang ninja-build build-essential libssl-dev pkg-config libboost-all-dev libsodium-dev libzmq5 libzmq3-dev golang-go libgmp-dev libc++-dev zlib1g-dev -y --no-install-recommends && cd src/Miningcore && dotnet publish -c Release --framework net6.0 -o /app/build/ -r win-x64 --self-contained false'
+docker run --rm -v $(pwd):/app -w /app mcr.microsoft.com/dotnet/sdk:8.0 /bin/bash -c 'apt update && apt install cmake clang ninja-build build-essential libssl-dev pkg-config libboost-all-dev libsodium-dev libzmq5 libzmq3-dev golang-go libgmp-dev libc++-dev zlib1g-dev -y --no-install-recommends && cd src/Miningcore && dotnet publish -c Release --framework net8.0 -o /app/build/ -r win-x64 --self-contained false'
 ```
 
 To delete used images and containers you can run after all:
@@ -133,7 +137,7 @@ docker system prune -af
 
 ### Production OS
 
-Windows is **not** a supported production environment. Only Linux is. Please do not file issues related to running a pool on Windows. Windows topics should be posted under [discussions](https://github.com/blackmennewstyle/miningcore/discussions).
+Windows is **not** a supported production environment. Only Linux is. Please do not file issues related to running a pool on Windows. Windows topics should be posted under [discussions](https://github.com/ocminer/miningcore/discussions).
 
 Running and developing Miningcore on Windows is of course supported.
 
@@ -184,7 +188,7 @@ Once you have done this for all of your existing pools you should now restore yo
 
 ### Configuration
 
-Create a configuration file `config.json` as described [here](https://github.com/oliverw/miningcore/wiki/Configuration).
+Create a configuration file `config.json` as described [here](https://github.com/ocminer/miningcore/wiki/Configuration).
 
 ### Start the Pool
 
@@ -195,7 +199,7 @@ Miningcore -c config.json
 
 ## Supported Currencies
 
-Refer to [this file](https://github.com/blackmennewstyle/miningcore/blob/master/src/Miningcore/coins.json) for a complete list.
+Refer to [this file](https://github.com/ocminer/miningcore/blob/master/src/Miningcore/coins.json) for a complete list.
 
 ## Caveats
 
@@ -219,7 +223,7 @@ Refer to [this file](https://github.com/blackmennewstyle/miningcore/blob/master/
 
 ## API
 
-Miningcore comes with an integrated REST API. Please refer to this page for instructions: https://github.com/oliverw/miningcore/wiki/API
+Miningcore comes with an integrated REST API. Please refer to this page for instructions: https://github.com/ocminer/miningcore/wiki/API
 
 ## Running a production pool
 
@@ -227,20 +231,3 @@ A public production pool requires a web-frontend for your users to check their h
 
 Once again, do not run a production pool on Windows! This is not a supported configuration.
 
-## Donations
-
-To support this project you can become a [sponsor]( https://github.com/sponsors//blackmennewstyle ) or send a donation to the following accounts:
-
-* ETH:  `0xbC059e88A4dD11c2E882Fc6B83F8Ec12E4CCCFad`
-* BTC:  `16xvkGfG9nrJSKKo5nGWphP8w4hr2ZzVuw`
-* LTC:  `LLs76baYT7iMqQhizxtBC96Cy48iX3Eh1p`
-* DOGE: `DFuvDSFh4N3SiXGDnye2Vbc8kqvMHbyQE1`
-* KAS:  `kaspa:qpmf0wyu7c5z4l82ax9cfc5ughwk2f9lgu8uckkqrrpjqkxuk7yrga5nntvgn`
-* CCX:  `ccx7S4B3gBeH1SGWCfqZp3NM7Vavg7H3S8ovJn8fU4bwC4vU7ChWfHtbNzifhrpbJ74bMDxj4KZFTcznTfsucCEg1Kgv7zbNgs`
-* FIRO: `a5AsoTSkfPHQ3SUmR6binG1XW7oQQoFNU1`
-* ERGO: `9gYyuZzaSw3TiCtUkSRuS3XVDUv41EFs3dtNCFGqiEwHqpb7gkF`
-* WART: `7795fc0fe93e7e4e232a212f00bdc8885c580a5666d39a0d`
-* XMR:  `483zaHtMRfM7rw1dXgebhWaRR8QLgAF6w4BomAV319FVVHfdbYTLVuBRc4pQgRAnRpfy6CXvvwngK4Lo3mRKE29RRx3Jb5c`
-* XEL:  `xel:ajnsfv065qusndt0hfsngecrnf5690drmqmc0uq0etlx8zjlcyzqq2slgvt`
-* CTXC: `0xbb60200d5151a4a0f9a75014e04cf61a0a9f0daf`
-* ZANO: `ZxDKT1aqiEXPA5cDADtYEfMR1oXsRd68bby4nzUvVmnjHzzrfvjwhNdQ9yiWNeGutzg9LZdwsbP2FGB1gNpZXiYY1fCfpw33c`

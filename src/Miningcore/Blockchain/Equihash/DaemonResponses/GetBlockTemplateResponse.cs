@@ -31,17 +31,39 @@ public class EquihashBlockTemplate : Bitcoin.DaemonResponses.BlockTemplate
 
     [JsonProperty("finalsaplingroothash")]
     public string FinalSaplingRootHash { get; set; }
-    
+
     // Veruscoin
     [JsonProperty("merged_bits")]
     public string MergedBits { get; set; } = null;
-    
+
     [JsonProperty("mergeminebits")]
     public string MergeMineBits { get; set; } = null;
-    
+
     [JsonProperty("solution")]
     public string Solution { get; set; } = null;
-    
+
     [JsonProperty("nonce")]
     public string Nonce { get; set; } = null;
+
+    // RandomX (Junocash)
+    [JsonProperty("randomxseedhash")]
+    public string RandomXSeedHash { get; set; }
+
+    [JsonProperty("randomxseedheight")]
+    public ulong? RandomXSeedHeight { get; set; }
+
+    [JsonProperty("defaultroots")]
+    public EquihashDefaultRoots DefaultRoots { get; set; }
+}
+
+public class EquihashDefaultRoots
+{
+    [JsonProperty("merkleroot")]
+    public string MerkleRoot { get; set; }
+
+    [JsonProperty("blockcommitmentshash")]
+    public string BlockCommitmentsHash { get; set; }
+
+    [JsonProperty("authdataroot")]
+    public string AuthDataRoot { get; set; }
 }

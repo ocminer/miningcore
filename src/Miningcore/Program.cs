@@ -378,6 +378,8 @@ public class Program : BackgroundService
 
         await Guard(()=> Task.WhenAll(tasks), ex =>
         {
+            logger.Error(ex, () => $"Pool startup error: {ex.GetType().Name}: {ex.Message}");
+
             switch(ex)
             {
                 case PoolStartupException pse:

@@ -1,0 +1,79 @@
+{
+    "logging": {
+        "level": "info",
+        "enableConsoleLog": true,
+        "enableConsoleColors": true
+    },
+    "banning": {
+        "manager": "Integrated",
+        "banOnJunkReceive": false,
+        "banOnInvalidShares": false
+    },
+    "notifications": {
+        "enabled": false
+    },
+    "persistence": {
+        "postgres": {
+            "host": "127.0.0.1",
+            "port": 5432,
+            "user": "miningcore",
+            "password": "your_postgres_password",
+            "database": "miningcore"
+        }
+    },
+    "paymentProcessing": {
+        "enabled": false
+    },
+    "api": {
+        "enabled": true,
+        "listenAddress": "*",
+        "port": 4001,
+        "rateLimiting": {
+            "disabled": true
+        }
+    },
+    "pools": [{
+        "id": "juno1",
+        "enabled": true,
+        "coin": "junocash",
+        "enableInternalStratum": true,
+        "address": "YOUR_TRANSPARENT_T_ADDRESS",
+        "extra": {
+            "z-address": "YOUR_SHIELDED_Z_ADDRESS"
+        },
+        "rewardRecipients": [],
+        "blockRefreshInterval": 1000,
+        "jobRebroadcastTimeout": 30,
+        "clientConnectionTimeout": 600,
+        "banning": {
+            "enabled": false
+        },
+        "ports": {
+            "3334": {
+                "listenAddress": "0.0.0.0",
+                "difficulty": 1000,
+                "name": "Junocash",
+                "varDiff": {
+                    "minDiff": 100,
+                    "maxDiff": 100000,
+                    "targetTime": 15,
+                    "retargetTime": 30,
+                    "variancePercent": 30
+                }
+            }
+        },
+        "daemons": [
+            {
+                "host": "127.0.0.1",
+                "port": 18383,
+                "user": "your_rpc_user",
+                "password": "your_rpc_password"
+            }
+        ],
+        "paymentProcessing": {
+            "enabled": false,
+            "minimumPayment": 0.01,
+            "payoutScheme": "PPLNS"
+        }
+    }]
+}

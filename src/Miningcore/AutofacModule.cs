@@ -8,6 +8,7 @@ using Miningcore.Blockchain.Bitcoin;
 using Miningcore.Blockchain.Conceal;
 using Miningcore.Blockchain.Cryptonote;
 using Miningcore.Blockchain.Equihash;
+using Miningcore.Blockchain.Junocash;
 using Miningcore.Blockchain.Ergo;
 using Miningcore.Blockchain.Ethereum;
 using Miningcore.Blockchain.Handshake;
@@ -203,6 +204,11 @@ public class AutofacModule : Module
         // ZCash
 
         builder.RegisterType<EquihashJobManager>();
+
+        //////////////////////
+        // Junocash
+
+        builder.RegisterType<JunocashJobManager>();
 
         //////////////////////
         // Ergo

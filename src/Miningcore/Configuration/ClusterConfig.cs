@@ -42,6 +42,9 @@ public enum CoinFamily
     
     [EnumMember(Value = "handshake")]
     Handshake,
+
+    [EnumMember(Value = "junocash")]
+    Junocash,
         
     [EnumMember(Value = "kaspa")]
     Kaspa,
@@ -166,6 +169,7 @@ public abstract partial class CoinTemplate
         {CoinFamily.Ergo, typeof(ErgoCoinTemplate)},
         {CoinFamily.Ethereum, typeof(EthereumCoinTemplate)},
         {CoinFamily.Handshake, typeof(BitcoinTemplate)},
+        {CoinFamily.Junocash, typeof(EquihashCoinTemplate)},
         {CoinFamily.Kaspa, typeof(KaspaCoinTemplate)},
         {CoinFamily.Nexa, typeof(BitcoinTemplate)},
         {CoinFamily.Progpow, typeof(ProgpowCoinTemplate)},
